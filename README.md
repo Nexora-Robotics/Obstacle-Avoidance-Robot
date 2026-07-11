@@ -113,12 +113,11 @@ Obstacle-Avoidance-Robot
 
 ---
 
-# Gallery
+## Gallery
 
-| Top View            | Bottom View              |
-| ------------------- | ------------------------ |
-| ![](IMAGES/topside.jpeg) | ![](IMAGES/downside.jpeg) |
-
+| Top View | Bottom View |
+|----------|-------------|
+| <img src="images/topside.jpeg" width="400"> | <img src="images/downside.jpeg" width="400"> |
 > Replace the filenames above with the actual names of your uploaded images.
 
 ---
