@@ -1,0 +1,194 @@
+#include <Servo.h>
+
+//=============== MOTOR PINS =================
+
+// Right
+#define RIGHT_IN1 8
+#define RIGHT_IN2 9
+
+// Left
+#define LEFT_IN3 10
+#define LEFT_IN4 11
+
+//=============== ULTRASONIC =================
+
+#define TRIG 6
+#define ECHO 7
+
+//=============== SERVO ======================
+
+Servo scanner;
+
+const int CENTER = 90;
+const int LEFT = 150;
+const int RIGHT = 30;
+
+int leftDistance;
+int rightDistance;
+int frontDistance;
+
+//============================================
+
+void setup()
+{
+  Serial.begin(9600);
+
+  pinMode(RIGHT_IN1, OUTPUT);
+  pinMode(RIGHT_IN2, OUTPUT);
+
+  pinMode(LEFT_IN3, OUTPUT);
+  pinMode(LEFT_IN4, OUTPUT);
+
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+
+  scanner.attach(5);
+  scanner.write(CENTER);
+
+  stopRobot();
+
+  delay(1000);
+
+  Serial.println("Obstacle Avoidance Ready");
+}
+
+//============================================
+
+void loop()
+{
+  frontDistance = getDistance();
+
+  Serial.print("Front : ");
+  Serial.println(frontDistance);
+
+  if(frontDistance > 20)
+  {
+    forward();
+  }
+  else
+  {
+    avoidObstacle();
+  }
+
+  delay(50);
+}
+
+//============================================
+
+void avoidObstacle()
+{
+  stopRobot();
+  delay(300);
+
+  backward();
+  delay(500);
+
+  stopRobot();
+  delay(300);
+
+  scanner.write(LEFT);
+  delay(500);
+  leftDistance = getDistance();
+
+  scanner.write(RIGHT);
+  delay(700);
+  rightDistance = getDistance();
+
+  scanner.write(CENTER);
+  delay(400);
+
+  Serial.print("Left : ");
+  Serial.println(leftDistance);
+
+  Serial.print("Right : ");
+  Serial.println(rightDistance);
+
+  if(leftDistance > rightDistance)
+  {
+    turnLeft();
+    delay(700);
+  }
+  else
+  {
+    turnRight();
+    delay(700);
+  }
+
+  stopRobot();
+  delay(200);
+}
+
+//============================================
+
+int getDistance()
+{
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+
+  digitalWrite(TRIG, LOW);
+
+  long duration = pulseIn(ECHO, HIGH, 30000);
+
+  if(duration == 0)
+    return 400;
+
+  return duration * 0.034 / 2;
+}
+
+//============================================
+
+void forward()
+{
+  digitalWrite(RIGHT_IN1, LOW);
+  digitalWrite(RIGHT_IN2, HIGH);
+
+  digitalWrite(LEFT_IN3, LOW);
+  digitalWrite(LEFT_IN4, HIGH);
+}
+
+//============================================
+
+void backward()
+{
+  digitalWrite(RIGHT_IN1, HIGH);
+  digitalWrite(RIGHT_IN2, LOW);
+
+  digitalWrite(LEFT_IN3, HIGH);
+  digitalWrite(LEFT_IN4, LOW);
+}
+
+//============================================
+
+void turnLeft()
+{
+  digitalWrite(RIGHT_IN1, LOW);
+  digitalWrite(RIGHT_IN2, HIGH);
+
+  digitalWrite(LEFT_IN3, HIGH);
+  digitalWrite(LEFT_IN4, LOW);
+}
+
+//============================================
+
+void turnRight()
+{
+  digitalWrite(RIGHT_IN1, HIGH);
+  digitalWrite(RIGHT_IN2, LOW);
+
+  digitalWrite(LEFT_IN3, LOW);
+  digitalWrite(LEFT_IN4, HIGH);
+}
+
+//============================================
+
+void stopRobot()
+{
+  digitalWrite(RIGHT_IN1, LOW);
+  digitalWrite(RIGHT_IN2, LOW);
+
+  digitalWrite(LEFT_IN3, LOW);
+  digitalWrite(LEFT_IN4, LOW);
+}
