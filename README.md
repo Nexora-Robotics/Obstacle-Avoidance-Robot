@@ -4,7 +4,7 @@
 
 ### Autonomous Obstacle Avoidance Robot
 
-<img src="images/robot_top.jpg" width="850">
+  <img src="https://raw.githubusercontent.com/Nexora-Robotics/.github/main/profile/banner.png" width="100%" alt="Nexora Robotics Banner">
 
 ### Developed by Nexora Robotics
 
