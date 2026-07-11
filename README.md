@@ -96,7 +96,6 @@ Obstacle-Avoidance-Robot
 ├── docs/
 ├── images/
 ├── videos/
-├── wiring/
 ├── README.md
 └── LICENSE
 ```
@@ -118,7 +117,7 @@ Obstacle-Avoidance-Robot
 
 | Top View            | Bottom View              |
 | ------------------- | ------------------------ |
-| ![](images/top.jpg) | ![](images/downside.jpg) |
+| ![](IMAGES/topside.jpeg) | ![](IMAGES/downside.jpeg) |
 
 > Replace the filenames above with the actual names of your uploaded images.
 
