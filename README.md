@@ -117,7 +117,7 @@ Obstacle-Avoidance-Robot
 
 | Top View | Bottom View |
 |----------|-------------|
-| <img src="images/topside.jpeg" width="400"> | <img src="images/downside.jpeg" width="400"> |
+| <img src="IMAGES/topside.jpeg" width="400"> | <img src="IMAGES/downside .jpeg" width="400"> |
 > Replace the filenames above with the actual names of your uploaded images.
 
 ---
